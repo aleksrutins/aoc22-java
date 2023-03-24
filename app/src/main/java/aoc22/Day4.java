@@ -11,11 +11,12 @@ public class Day4 implements Exercise<Stream<Pair>> {
 
     @Override
     public void run(Supplier<Stream<Pair>> input) {
-        System.out.println("Part 1: " + input.get().filter(inp ->
-                (inp.elf1().get(0) <= inp.elf2().get(0) && inp.elf1().get(inp.elf1().size() - 1) >= inp.elf2().get(inp.elf2().size() - 1)) ||
-                    (inp.elf2().get(0) <= inp.elf1().get(0) && inp.elf2().get(inp.elf2().size() - 1) >= inp.elf1().get(inp.elf1().size() - 1))
+        System.out.println("Part 1: " + input.get().filter(pair ->
+                (pair.elf1().get(0) <= pair.elf2().get(0) && pair.elf1().get(pair.elf1().size() - 1) >= pair.elf2().get(pair.elf2().size() - 1)) ||
+                    (pair.elf2().get(0) <= pair.elf1().get(0) && pair.elf2().get(pair.elf2().size() - 1) >= pair.elf1().get(pair.elf1().size() - 1))
             )
             .count());
+        System.out.println("Part 2: " + input.get().filter(pair -> pair.elf1().stream().anyMatch(i -> pair.elf2().contains(i))).count());
     }
 
     @Override
