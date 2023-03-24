@@ -1,5 +1,9 @@
 package aoc22;
 
-public interface Exercise {
-  void run(String input);
+import java.util.function.Supplier;
+
+public interface Exercise<I> {
+    void run(Supplier<I> input);
+
+    I parseInput(String input);
 }

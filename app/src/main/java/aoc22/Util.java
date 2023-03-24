@@ -9,18 +9,18 @@ public class Util {
     public static String getInput(String day) throws IOException {
         var url = Util.class.getResource("/input/" + day + ".dat");
 
-        if(url == null) {
-          return "";
+        if (url == null) {
+            return "";
         }
 
         try (var stream = url.openStream()) {
-          return new String(stream.readAllBytes());
+            return new String(stream.readAllBytes());
         }
     }
 
-    public static void runDay(Exercise day) throws IOException {
+    public static <I> void runDay(Exercise<I> day) throws IOException {
         var data = getInput(day.getClass().getSimpleName().toLowerCase());
         System.out.println("--- " + day.getClass().getSimpleName() + " ---");
-        day.run(data);
+        day.run(() -> day.parseInput(data));
     }
 }
