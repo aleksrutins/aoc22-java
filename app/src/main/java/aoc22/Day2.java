@@ -1,0 +1,30 @@
+package aoc22;
+
+import java.util.stream.Stream;
+
+public class Day2 implements Exercise {
+    private record Round(int opp, int me) {}
+
+    private Stream<Round> parseInput(String input) {
+        return input.lines().filter(line -> !line.isEmpty()).map(line -> new Round(
+                line.split(" ")[0].charAt(0) - 'A',
+                line.split(" ")[1].charAt(0) - 'X'
+        ));
+    }
+
+    private int pointsFor(int play) {
+        return play + 1;
+    }
+
+    private int pointsFor(Round round) {
+        if(round.opp == round.me) return pointsFor(round.me) + 3;
+        else if(round.opp == 0 && round.me == 1) return pointsFor(1) + 6;
+        else if(round.opp == 1 && round.me == 2) return pointsFor(2) + 6;
+        else if(round.opp == 2 && round.me == 0) return pointsFor(0) + 6;
+        else return pointsFor(round.me);
+    }
+
+    public void run(String input) {
+        System.out.println("Score: " + parseInput(input).map(this::pointsFor).reduce(0, Integer::sum));
+    }
+}
