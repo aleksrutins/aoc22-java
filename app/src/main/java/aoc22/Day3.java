@@ -1,9 +1,13 @@
 package aoc22;
 
+import aoc22.day3.Group;
 import aoc22.day3.Knapsack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Day3 implements Exercise<Stream<Knapsack>> {
@@ -29,5 +33,18 @@ public class Day3 implements Exercise<Stream<Knapsack>> {
     @Override
     public void run(Supplier<Stream<Knapsack>> input) {
         System.out.println(input.get().map(Knapsack::shared).filter(Objects::nonNull).map(this::priority).reduce(Integer::sum));
+
+        var allSacks = input.get().sequential().toList();
+        var groups = new ArrayList<Group>();
+
+        IntStream.range(0, allSacks.size()).forEach(idx -> {
+            try {
+                groups.get(idx / 3).sacks()[idx % 3] = allSacks.get(idx);
+            } catch (IndexOutOfBoundsException e) {
+                groups.add(new Group(new Knapsack[]{allSacks.get(idx), null, null}));
+            }
+        });
+
+        System.out.println(groups.stream().map(Group::shared).filter(Objects::nonNull).map(this::priority).reduce(Integer::sum));
     }
 }

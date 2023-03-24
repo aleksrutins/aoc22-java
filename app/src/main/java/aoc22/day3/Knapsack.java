@@ -9,4 +9,8 @@ public record Knapsack(String compartment1, String compartment2) {
         }
         return null;
     }
+
+    public String allTheStuff() {
+        return compartment1 + compartment2;
+    }
 }
