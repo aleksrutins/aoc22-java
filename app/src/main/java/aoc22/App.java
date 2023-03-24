@@ -14,5 +14,6 @@ public class App {
         System.out.println(new App().getGreeting());
         Util.runDay(new Day2());
         Util.runDay(new Day3());
+        Util.runDay(new Day4());
     }
 }
