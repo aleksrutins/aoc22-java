@@ -5,3 +5,4 @@
 build
 
 app/src/main/resources/input/*.dat
+app/bin
