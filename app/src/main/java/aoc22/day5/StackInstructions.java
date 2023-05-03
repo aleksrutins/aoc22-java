@@ -8,6 +8,7 @@ import static java.lang.Integer.parseInt;
 public class StackInstructions {
     public ArrayList<String> stacks = new ArrayList<>();
     public ArrayList<MoveInstruction> instructions = new ArrayList<>();
+    public boolean isPart2 = false;
 
     public static record MoveInstruction(int num, int from, int to) {
         public static MoveInstruction parse(String input) {
@@ -22,7 +23,8 @@ public class StackInstructions {
         var fromStack = stacks.get(instruction.from - 1);
         var toStack = stacks.get(instruction.to - 1);
 
-        var value = new StringBuilder(fromStack.substring(fromStack.length() - instruction.num)).reverse().toString();
+        var value = fromStack.substring(fromStack.length() - instruction.num);
+        if(!isPart2) value = new StringBuilder(value).reverse().toString();
 
         stacks.set(instruction.from - 1, fromStack.substring(0, fromStack.length() - instruction.num));
         stacks.set(instruction.to - 1, toStack + value);
