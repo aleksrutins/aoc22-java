@@ -16,5 +16,6 @@ public class App {
         Util.runDay(new Day3());
         Util.runDay(new Day4());
         Util.runDay(new Day5());
+        Util.runDay(new Day6());
     }
 }
