@@ -21,6 +21,7 @@ public class Util {
     public static <I> void runDay(Exercise<I> day) throws IOException {
         var data = getInput(day.getClass().getSimpleName().toLowerCase());
         System.out.println("--- " + day.getClass().getSimpleName() + " ---");
+        day.resolveDI();
         day.run(() -> day.parseInput(data));
     }
 }
